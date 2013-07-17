@@ -68,14 +68,14 @@ if(require.main == module) {
 	program
 		.option('-c, --checks <check_file>', 'Path to checks.json', clone(assertFileExists), CHECKSFILE_DEFAULT)
 		.option('-f, --file <html_file>', 'Path to index.html', clone(assertFileExists), HTMLFILE_DEFAULT)
-		.option('-u, --url <url>', 'URL to index.html', 
+		.option('-u, --url <url>', 'URL to index.html')
 		.parse(process.argv);
 
 	var htmlFile = program.file;
 	if(program.url){
 		rest.get(program.url).on('complete', function(result){
 			htmlFile = cheerio.load(result);
-		}
+		})
 	}
 
 	var checkJson = checkHtmlFile(program.file, program.checks);
